@@ -42,6 +42,29 @@ class PpoPlayerContinuous(BasePlayer):
         self.is_rnn = self.model.is_rnn()
 
     def get_action(self, obs, is_determenistic = False):
+        # sim_states = "/home/alex/all/projects/isaacgym/2022/isaacgymenvs/data_eval_real/states.pkl"
+        # eval_dir = "/home/alex/all/projects/isaacgym/2022/isaacgymenvs/data_eval_real/"
+        # with open(sim_states, 'rb') as f:
+        #     import pickle
+        #     sim_states = pickle.load(f)
+        #
+        # sim_obs = sim_states['trajectories']['last_full_obs'].squeeze()
+        # rstates = self.states
+        # for obs_arr in sim_obs:
+        #     obs_tensor = torch.tensor(obs_arr).float().to(self.device).unsqueeze(0)
+        #     obs_tensor = self._preproc_obs(obs_tensor)
+        #     input_dict = {
+        #         'is_train': False,
+        #         'prev_actions': None,
+        #         'obs': obs_tensor,
+        #         'rnn_states': rstates
+        #     }
+        #     output_dict = self.model(input_dict)
+        #     actions = output_dict['mus']
+        #     rstates = output_dict['rnn_states']
+        #     actions = rescale_actions(self.actions_low, self.actions_high, torch.clamp(actions, -1.0, 1.0))
+        #     pass
+
         if self.has_batch_dimension == False:
             obs = unsqueeze_obs(obs)
         obs = self._preproc_obs(obs)
